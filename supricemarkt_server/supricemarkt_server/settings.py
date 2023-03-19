@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'supricemarkt_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 's',
+        'NAME': 'supricemarkt',
         'USER': 'prueba',
         'PASSWORD': '1234',
         'HOST': '127.0.0.1',
