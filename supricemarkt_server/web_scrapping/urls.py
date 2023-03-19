@@ -4,7 +4,9 @@ from . import views
 
 urlpatterns = [
     path('/api/search', views.getMainData, name='scrapedata'),
-    path('/', views.home, name="home")
+    path('/api/search/dia', views.getDiaData, name='scrapedata'),
+    path('/api/search/carrefour', views.getCarrefourData, name='scrapedata'),
+    path('/api/search/ahorra', views.getAhorraMasData, name='scrapedata'), 
 ]
 
 
