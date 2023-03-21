@@ -6,6 +6,7 @@ import { ROUTES } from './util/Routes';
 import HomeImage from './static/images/home.png'
 import CestaImage from './static/images/cesta.png'
 import NavBar from './pages/Components/NavBar/NavBar';
+import Cart from './pages/Cart/Cart';
 
 function App() {
   const [route, setRoute] = useState<string>(ROUTES.HOME)
@@ -25,6 +26,7 @@ function App() {
           
           <Routes>
             <Route path={ROUTES.HOME} element={<Home/>}/>
+            <Route path={ROUTES.CART} element={<Cart/>}/>
           </Routes>
 
           </ProductsContext.Provider>

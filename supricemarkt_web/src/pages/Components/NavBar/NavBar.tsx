@@ -4,7 +4,7 @@ import { cards } from '../../../App';
 import { ProductsContext } from '../../../Context/Context';
 import { ROUTES } from '../../../util/Routes';
 import NavBarItem from './NavBarItem';
-
+import './NavBar.css'
 
 function NavBar() {
 
@@ -13,10 +13,8 @@ function NavBar() {
 
 
     return (
-        <nav className={`nav_styles ${route===ROUTES.HOME?`nav`:`nav_extra`}`}>
-            <div  className='navbar'>            
-  
-                <div className='nav_extra_container'>
+        <nav className={`nav_styles ${route===ROUTES.HOME?`nav`:`nav_extra`}`}>  
+
                     {cards.map((item)=>(
                             <NavBarItem nombre={item.nombre}
                                      route={item.route}
@@ -24,8 +22,6 @@ function NavBar() {
                                      color={item.color}
                                      key={item.color}/>
                     ))}
-                </div>
-            </div>
         </nav>
     );
   }
