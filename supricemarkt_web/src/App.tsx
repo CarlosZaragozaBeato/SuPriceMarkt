@@ -1,22 +1,60 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-
-
+import { ProductsContext, tipos } from './Context/Context';
+import Home from './pages/Home/Home';
+import { ROUTES } from './util/Routes';
+import HomeImage from './static/images/home.png'
+import CestaImage from './static/images/cesta.png'
+import NavBar from './pages/Components/NavBar/NavBar';
 
 function App() {
+  const [route, setRoute] = useState<string>(ROUTES.HOME)
+
+  let valores:tipos ={
+    route:route,
+    setRoute:setRoute
+} 
+
   return (
     <>
       <Router>
-        
-        <Route path={} element={}/>
 
+        <ProductsContext.Provider value={valores}>
+          <NavBar/>
 
+          
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Home/>}/>
+          </Routes>
+
+          </ProductsContext.Provider>
       </Router>
     
     
     </>
   );
 }
-
 export default App;
+
+export interface typeCards {
+  nombre:string,
+  route: string,
+  image: string,
+  color:string
+}
+
+export let cards:typeCards[] = [
+    
+  {
+    nombre:"HOME",
+    route:ROUTES.HOME,
+    image:HomeImage,
+    color:'#FFC4C4'
+  },
+  {
+    nombre:"CART",
+    route:ROUTES.CART,
+    image: CestaImage,
+    color:'#DFF6FF'
+  }     
+]
