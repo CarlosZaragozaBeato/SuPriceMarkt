@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ProductsContext, tipos } from './Context/Context';
-import Home from './pages/Home/Home';
+import Home from './pages/home/Home';
 import { ROUTES } from './util/Routes';
 import HomeImage from './static/images/home.png'
 import CestaImage from './static/images/cesta.png'
@@ -40,7 +40,7 @@ export default App;
 
 export interface typeCards {
   nombre:string,
-  route: string,
+  route_param: string,
   image: string,
   color:string
 }
@@ -49,13 +49,13 @@ export let cards:typeCards[] = [
     
   {
     nombre:"HOME",
-    route:ROUTES.HOME,
+    route_param:ROUTES.HOME,
     image:HomeImage,
     color:'#FFC4C4'
   },
   {
     nombre:"CART",
-    route:ROUTES.CART,
+    route_param:ROUTES.CART,
     image: CestaImage,
     color:'#DFF6FF'
   }     

@@ -1,0 +1,14 @@
+
+
+main{
+    min-height: 88vh;
+    background: red;
+}
+
+main .search{
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding:1vh 0;
+}

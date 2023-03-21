@@ -13,11 +13,10 @@ function NavBar() {
 
 
     return (
-        <nav className={`nav_styles ${route===ROUTES.HOME?`nav`:`nav_extra`}`}>  
-
+        <nav>  
                     {cards.map((item)=>(
                             <NavBarItem nombre={item.nombre}
-                                     route={item.route}
+                                    route_param={item.route_param}
                                      image={item.image}
                                      color={item.color}
                                      key={item.color}/>
