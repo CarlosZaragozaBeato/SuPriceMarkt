@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 
-
+from selenium.webdriver.chrome.options import Options
 from web_scrapping.scrapping.Search import Search
 from selenium import webdriver
 
 
 @require_http_methods(["GET"])
 def getMainData(request):
+        chrome_options = Options()
+        chrome_options.add_argument("--disable-notifications")
+        
         driver = webdriver.Chrome()
         driver.maximize_window()
         
@@ -27,7 +30,11 @@ def getMainData(request):
 def getCarrefourData(request):
         data = []
         
-        driver = webdriver.Chrome()
+        
+        chrome_options = Options()
+        chrome_options.add_argument("--disable-notifications")
+        
+        driver = webdriver.Chrome(options=chrome_options)
         driver.maximize_window()
         
         producto = request.GET.get("producto")
@@ -44,6 +51,11 @@ def getCarrefourData(request):
 def getAhorraMasData(request):
         data = []
         
+        chrome_options = Options()
+        chrome_options.add_argument("--disable-notifications")
+        
+        driver = webdriver.Chrome(options=chrome_options)
+        
         driver = webdriver.Chrome()
         driver.maximize_window()
         
@@ -59,15 +71,20 @@ def getAhorraMasData(request):
 
 @require_http_methods(["GET"])
 def getDiaData(request):
-        data = []
+
         
-        driver = webdriver.Chrome()
+        
+        chrome_options = Options()
+        chrome_options.add_argument("--disable-notifications")
+        
+        driver = webdriver.Chrome(options=chrome_options)
         driver.maximize_window()
         
-        producto = request.GET.get("producto")
-        producto = "Coca Cola 2L".lower()
-        
-        search = Search(driver=driver, producto_name = producto)
+        producto = request.GET.get('producto')
+
+        data = []
+
+        search = Search(driver=driver, product_name=producto)
         data = search.SearchDiaName()
         driver.quit()
 

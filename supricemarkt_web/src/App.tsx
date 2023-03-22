@@ -1,19 +1,42 @@
 import React,{useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ProductsContext, tipos } from './Context/Context';
+import { AhorraMasPrd, CarrefourPrd, DiaPrd, ProductsContext, supermercadoType, tipos } from './Context/Context';
 import Home from './pages/home/Home';
 import { ROUTES } from './util/Routes';
 import HomeImage from './static/images/home.png'
 import CestaImage from './static/images/cesta.png'
 import NavBar from './pages/Components/NavBar/NavBar';
 import Cart from './pages/Cart/Cart';
+import { Producto } from './model/Producto';
+import { Supermercado } from './model/Supermercado';
+
 
 function App() {
+
   const [route, setRoute] = useState<string>(ROUTES.HOME)
+  const [items, setItems] = useState<boolean>(false)
+  const [diaProducts, setDiaProducts] = useState<supermercadoType>(DiaPrd)
+  const [carrefourProducts, setCarrefourProducts] = useState<supermercadoType>(CarrefourPrd)
+  const [ahorraMasProducts, setAhorraMasProducts] = useState<supermercadoType>(AhorraMasPrd)
+
+
+
+
+
+
 
   let valores:tipos ={
     route:route,
-    setRoute:setRoute
+    setRoute:setRoute,
+    items:items,
+    setItems:setItems,
+    ahorraMasProducts:ahorraMasProducts,
+    setAhorraMasProducts:setAhorraMasProducts,
+    carrefourProducts:carrefourProducts,
+    setCarrefourProducts:setCarrefourProducts,
+    diaProducts:diaProducts,
+    setDiaProducts:setDiaProducts,
+
 } 
 
   return (
@@ -31,11 +54,10 @@ function App() {
 
           </ProductsContext.Provider>
       </Router>
-    
-    
     </>
   );
 }
+
 export default App;
 
 export interface typeCards {
@@ -45,8 +67,12 @@ export interface typeCards {
   color:string
 }
 
+
+
+
+
 export let cards:typeCards[] = [
-    
+
   {
     nombre:"HOME",
     route_param:ROUTES.HOME,

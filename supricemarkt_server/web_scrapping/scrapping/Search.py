@@ -43,21 +43,23 @@ class SearchDia(Util):
     # Vamos uno a uno para recoger los 5 primeros productos que aparezcan en la pagina
     def _ComprobacionDia(self):
         lista = []
-        lista_productos = len(self.ObtenerListaElementos('//*[@id="productgridcontainer"]/div[1]/div'))
-    
-        for index in range(lista_productos):
+        try:
+            lista_productos = len(self.ObtenerListaElementos('//*[@id="productgridcontainer"]/div[1]/div'))
+        
+            for index in range(lista_productos):
 
-            #Metodo para saltarse la publicidad.
-            #TODO: Posible Modificacion
-            if index == 4:
-                continue
+                #Metodo para saltarse la publicidad.
+                #TODO: Posible Modificacion
+                if index == 4:
+                    continue
 
-            if index <=4 and lista_productos>=index:
-                self._RecuperarProductosDia(index, lista)
-                
-            if 3 >=lista_productos:
-                self._RecuperarProductosDia(index, lista)
-
+                if index <=4 and lista_productos>=index:
+                    self._RecuperarProductosDia(index, lista)
+                    
+                if 3 >=lista_productos:
+                    self._RecuperarProductosDia(index, lista)
+        except:
+            lista=[]
         return lista
 
     #Recuperamos la informacion del producto 
@@ -118,22 +120,26 @@ class SearchCarrefour(Util):
 
 
     def _ComprobarCarrefour(self):
-        lista_productos = len(self.ObtenerListaElementos('//*[@id="ebx-grid"]/article'))
         lista = []
         
-        for index in range(lista_productos):
-            # La pagina del carrefour se salta el article 3
-            if index == 2:
-                continue
-            
-            
-            # TODO: COMPROBAR PROMOCIONES DE LA PAGINA
-            if index <=4 and lista_productos>=index:
-                self._RecuperarProductosCarrefour(index, lista)
+        try:
+            lista_productos = len(self.ObtenerListaElementos('//*[@id="ebx-grid"]/article'))
 
-            if 3 >=lista_productos:
-                self._RecuperarProductosCarrefour(index, lista)
             
+            for index in range(lista_productos):
+                # La pagina del carrefour se salta el article 3
+                if index == 2:
+                    continue
+                
+                
+                # TODO: COMPROBAR PROMOCIONES DE LA PAGINA
+                if index <=4 and lista_productos>=index:
+                    self._RecuperarProductosCarrefour(index, lista)
+
+                if 3 >=lista_productos:
+                    self._RecuperarProductosCarrefour(index, lista)
+        except:
+            lista=[]    
 
         return lista
 
@@ -178,10 +184,10 @@ class SearchAhorraMas(Util):
         search_button = self.obtenerClassName('fa-search')
         search_button.click()
 
-        try:
-            resultado = self._ComprobarAhorraMas()
-        except:
-            resultado = []
+
+        resultado = self._ComprobarAhorraMas()
+
+
 
             
         return resultado
@@ -189,43 +195,44 @@ class SearchAhorraMas(Util):
 
 
     def _ComprobarAhorraMas(self):
-        lista_productos = len(self.ObtenerListaElementos('//*[@id="product-search-results"]/div[2]/div[4]/div[2]/div'))
         lista = []
+
+
+        lista_productos = len(self.ObtenerListaElementosClassName('product'))
         
+        listaTitulos = self.ObtenerListaElementosClassName('product-name-gtm')
+        listaImagenes = self.ObtenerListaElementosClassName('tile-image')
+        listaPrecios = self.ObtenerListaElementosClassName('value')
         
         for index in range(lista_productos):
-            if index <=4 and lista_productos>=index:
-                self._RecuperarProductosAhorraMas(index, lista)
+            if index <=3 and lista_productos>=index:
+                self._RecuperarProductosAhorraMas(index, lista,listaTitulos,listaImagenes,listaPrecios)
+            if 2 >=lista_productos:
+                self._RecuperarProductosAhorraMas(index, lista,listaTitulos,listaImagenes,listaPrecios)
 
-            if 3 >=lista_productos:
-                self._RecuperarProductosAhorraMas(index, lista)
         return lista
-
-            
+    
         #Recuperamos la informacion del producto 
-    def _RecuperarProductosAhorraMas(self, index, lista):
+    def _RecuperarProductosAhorraMas(self, index, lista, listaTitulos, listaImagenes, listaPrecios):
         
-            index += 1 
-            cadena_title = f'//*[@id="product-search-results"]/div[2]/div[4]/div[2]/div[{index}]/div/div/div[3]/div[4]/a/h2'
-            title = self.obtenerXpath(cadena_title).text
+            cadena_title = listaTitulos[index]
+            title = cadena_title.text
             
             
-            cadena_image = f'//*[@id="product-search-results"]/div[2]/div[4]/div[2]/div[{index}]/div/div/div[1]/a/img'
-            imagen = self.obtenerXpath(cadena_image).get_attribute('src')
+            cadena_image = listaImagenes[index]
+            imagen = cadena_image.get_attribute('src')
 
-            cadena_precio = f'//*[@id="product-search-results"]/div[2]/div[4]/div[2]/div[{index}]/div/div/div[3]/div[2]/div[1]/div/span/span'
-            precio = self.obtenerXpath(cadena_precio).text
+            cadena_precio = listaPrecios[index]
+            precio = cadena_precio.text
             
             
             resultado = (title, precio, imagen)
             lista.append(resultado)
 
-
-#Clase que estara en contacto con el servidor
 class Search(SearchDia, SearchCarrefour, SearchAhorraMas):
     def SearchAll(self):
         resultados_dia = self.SearchDiaName()        
         resultados_carrefour = self.SearchCarrefourName()
         resultados_ahorra_mas = self.SearchAhorraMasName()
 
-        return [resultados_dia, resultados_carrefour, resultados_ahorra_mas]
+        return resultados_dia, resultados_carrefour, resultados_ahorra_mas

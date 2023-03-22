@@ -7,17 +7,26 @@
   --third:#E49393;
   --forth:#D8D8D8;
 
+
+
   /*SEGUNDA PALETA PRUEBA*/
-  --first_v2:#A9EEE6;
+  --first_v2:#AACFCF;
   --second_v2:#FEFAEC;
-  --third_v2:#F9A1BC;
-  --fourth_v2:#625772;
-
-
-
+  --third_v2:#ffe7e7;
+  --fourth_v2:#596E79;
+  --white:#FFFFFF;
+  --blue:#F4F9F9;
+  --pink:#FFFAFA;
+  --black:#393053;
 }
 * {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+#root{
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--blue);
 }

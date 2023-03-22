@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web_scrapping',
-    'sql_actions'
-    
+    'sql_actions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,9 +50,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'supricemarkt_server.urls'
+
+
 
 TEMPLATES = [
     {
@@ -87,6 +90,13 @@ DATABASES = {
     }
 }
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = [    'DELETE',    'GET',    'OPTIONS',    'PATCH',    'POST',    'PUT',]
+
+CORS_ALLOW_HEADERS = [    'access-control-allow-origin',    'content-type',]
+
+CORS_PREFLIGHT_MAX_AGE = 86400
 
 
 # Password validation
