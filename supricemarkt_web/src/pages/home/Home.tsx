@@ -67,19 +67,15 @@ function Home() {
                           },
                     }
 
+
                     setDiaProducts(dia)
                     setCarrefourProducts(carrefour)
                     setAhorraMasProducts(ahorraMas)
                     
-
-
                     console.log(response.data)
-
 
                     setItems(true);
                     setLoading(false);
-
-
                 })
                 .catch((e) => { console.error(e)});
 

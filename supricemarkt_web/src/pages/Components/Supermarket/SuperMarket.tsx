@@ -10,6 +10,7 @@ function SuperMarket(item:supermercadoType){
 
 
 
+
     return(
         <div className="super_item">
             <div className="super_header">

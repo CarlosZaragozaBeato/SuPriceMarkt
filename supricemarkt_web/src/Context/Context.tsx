@@ -16,6 +16,10 @@ export interface tipos {
     setCarrefourProducts:(c: supermercadoType) => void,
     ahorraMasProducts: supermercadoType,
     setAhorraMasProducts:(c: supermercadoType) => void,
+    ultimoProducto:Producto|null,
+    setUltimoProducto:(c:Producto)=> void,
+    listaProducts:Producto[], 
+    setListaProducts:(c:Producto[])=> void,
 }
 
 export let DiaPrd:supermercadoType = {
@@ -32,7 +36,7 @@ export let CarrefourPrd:supermercadoType = {
     supermercado:  {
         nombre: "Carrefour",
         web: "https://www.carrefour.es/?gclid=CjwKCAjwzuqgBhAcEiwAdj5dRrWaKe6kjy0ngHn23L15Mo9DSnoBxabHSbjgvOwoSA_Bs2TXC-t76xoCMckQAvD_BwE&gclsrc=aw.ds",
-        image: Carrefour,
+        image: 'https://www.carrefour.es/dist/rendering/home-front/imagotipo_color_cms.svg?e1f00957ccb57e68f67e134c5a97fccc',
       },
 }
 
@@ -56,6 +60,10 @@ let initialState:tipos = {
     setCarrefourProducts: ()=>{},
     ahorraMasProducts:AhorraMasPrd,
     setAhorraMasProducts: ()=>{},
+    ultimoProducto:null,
+    setUltimoProducto:()=>{},
+    listaProducts:[],
+    setListaProducts:()=>{}
 }
 
 

@@ -28,3 +28,8 @@ class Util:
     def obtenerClassName(self, ClassName):
         return self.wait1.until(EC.presence_of_element_located((
                 By.CLASS_NAME, ClassName)))
+    
+    def obtenerCssSelector(self, cssSelector):
+        return self.wait1.until(EC.presence_of_all_elements_located((
+            By.CSS_SELECTOR, cssSelector
+        )))

@@ -12,14 +12,15 @@ function MainComponent() {
 
 
 
-    const { diaProducts, carrefourProducts, ahorraMasProducts } = useContext(ProductsContext)
+    const { diaProducts, carrefourProducts, ahorraMasProducts, ultimoProducto } = useContext(ProductsContext)
 
 
-
+   
     return (
         <div className="main_component">
             <div className="main_header">
-                <h3>Seleccionado: <span>Ninguno</span></h3>
+
+                {ultimoProducto!=null?(<h3>Ultimo Añadido: <span>{ultimoProducto.nombre}</span></h3>):""}
             </div>
 
 
@@ -31,10 +32,6 @@ function MainComponent() {
 
             <SuperMarket listaProductos={ahorraMasProducts.listaProductos}
                 supermercado={ahorraMasProducts.supermercado} />
-
-
-
-
         </div>
     );
 }

@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure--z&cfx-&x(o5=f!co&j=t-31=2jsz!eq#ci*x@no&38s5*54jy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    
+]
 
 
 # Application definition
@@ -97,6 +99,9 @@ CORS_ALLOW_METHODS = [    'DELETE',    'GET',    'OPTIONS',    'PATCH',    'POST
 CORS_ALLOW_HEADERS = [    'access-control-allow-origin',    'content-type',]
 
 CORS_PREFLIGHT_MAX_AGE = 86400
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000',
+                        'http://127.0.0.1:8000']
 
 
 # Password validation

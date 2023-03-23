@@ -3,6 +3,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('main', include('web_scrapping.urls')),
+    path('sql', include('sql_actions.urls')),
 ]
 
 

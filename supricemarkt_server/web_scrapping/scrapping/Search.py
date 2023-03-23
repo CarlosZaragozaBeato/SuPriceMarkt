@@ -186,12 +186,8 @@ class SearchAhorraMas(Util):
 
 
         resultado = self._ComprobarAhorraMas()
-
-
-
-            
+    
         return resultado
-
 
 
     def _ComprobarAhorraMas(self):
@@ -199,21 +195,21 @@ class SearchAhorraMas(Util):
 
 
         lista_productos = len(self.ObtenerListaElementosClassName('product'))
-        
         listaTitulos = self.ObtenerListaElementosClassName('product-name-gtm')
         listaImagenes = self.ObtenerListaElementosClassName('tile-image')
-        listaPrecios = self.ObtenerListaElementosClassName('value')
-        
+
+
         for index in range(lista_productos):
             if index <=3 and lista_productos>=index:
-                self._RecuperarProductosAhorraMas(index, lista,listaTitulos,listaImagenes,listaPrecios)
-            if 2 >=lista_productos:
-                self._RecuperarProductosAhorraMas(index, lista,listaTitulos,listaImagenes,listaPrecios)
+                self._RecuperarProductosAhorraMas(index, lista,listaTitulos,listaImagenes)
+            if 3 >=lista_productos:
+                self._RecuperarProductosAhorraMas(index, lista,listaTitulos,listaImagenes)
 
         return lista
-    
+        
+            
         #Recuperamos la informacion del producto 
-    def _RecuperarProductosAhorraMas(self, index, lista, listaTitulos, listaImagenes, listaPrecios):
+    def _RecuperarProductosAhorraMas(self, index, lista, listaTitulos, listaImagenes):
         
             cadena_title = listaTitulos[index]
             title = cadena_title.text
@@ -221,12 +217,13 @@ class SearchAhorraMas(Util):
             
             cadena_image = listaImagenes[index]
             imagen = cadena_image.get_attribute('src')
-
-            cadena_precio = listaPrecios[index]
-            precio = cadena_precio.text
             
             
-            resultado = (title, precio, imagen)
+            index +=1 
+            
+            precio = self.obtenerCssSelector(f'#product-search-results > div:nth-child(2) > div.col-sm-12.col-lg-9 > div.row.product-grid > div:nth-child({index}) > div > div > div.tile-body > div.price > div:nth-child(1) > div > span > span')
+            
+            resultado = (title, precio[0].text, imagen)
             lista.append(resultado)
 
 class Search(SearchDia, SearchCarrefour, SearchAhorraMas):

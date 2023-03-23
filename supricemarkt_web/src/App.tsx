@@ -18,8 +18,8 @@ function App() {
   const [diaProducts, setDiaProducts] = useState<supermercadoType>(DiaPrd)
   const [carrefourProducts, setCarrefourProducts] = useState<supermercadoType>(CarrefourPrd)
   const [ahorraMasProducts, setAhorraMasProducts] = useState<supermercadoType>(AhorraMasPrd)
-
-
+  const [ultimoProducto, setUltimoProducto] = useState<Producto|null>(null)
+  const [listaProducts, setListaProducts] = useState<Producto[]> ([])
 
 
 
@@ -36,7 +36,10 @@ function App() {
     setCarrefourProducts:setCarrefourProducts,
     diaProducts:diaProducts,
     setDiaProducts:setDiaProducts,
-
+    ultimoProducto:ultimoProducto,
+    setUltimoProducto:setUltimoProducto,
+    listaProducts:listaProducts, 
+    setListaProducts:setListaProducts, 
 } 
 
   return (
