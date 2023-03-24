@@ -1,0 +1,10 @@
+.main_cart{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main_cart .product_cart{
+    width: 50%;
+}

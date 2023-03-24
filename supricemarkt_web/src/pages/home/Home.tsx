@@ -112,7 +112,8 @@ function Home() {
         <main>
             <div className="search">
                 <div>
-                    <input type="text" onChange={handleProducto} />
+                    <input type="text" onChange={handleProducto} 
+                            placeholder="Buscar Producto..."/>
                     <button onClick={getAllData}>
                         <img src={Lupa} alt="Search" />
                     </button>
