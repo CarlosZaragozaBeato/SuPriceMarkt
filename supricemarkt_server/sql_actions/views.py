@@ -33,6 +33,7 @@ def InsertProduct(request):
 
 
         for producto in all_products:
+            
             if producto.nombre == nombre and supermercado.nombre == producto.supermercado.nombre:
                 numero_veces = producto.numero_veces+1
 
@@ -54,7 +55,6 @@ def InsertProduct(request):
                                             numero_veces=numero_veces,
                                             precio=precio)
                 producto.save()
-
 
 
         return JsonResponse({'status': 'ok'})
