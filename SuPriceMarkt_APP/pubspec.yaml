@@ -67,6 +67,9 @@ flutter:
   assets:
     -  static/animation.json
     -  static/people_supermarket.png
+    -  static/compra.png
+    -  static/reset.png
+    -  static/empty.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

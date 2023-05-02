@@ -7,15 +7,21 @@ import 'package:supricemarkt_app/Data/model/Producto.dart';
 import 'package:supricemarkt_app/Data/responses/Data.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({Key? key}) : super(key: key);
+  List<Producto>? lista_productos_2;
+
+  SearchScreen(this.lista_productos_2);
+
   List<List<List<String>>> _lista_productos = [];
-  String estado_aplicacion = "CARGANDO";
+  String estado_aplicacion = "NO_DATA";
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+
+
   TextEditingController producto_controller = TextEditingController();
 
   void GetData() async{
@@ -25,7 +31,9 @@ class _SearchScreenState extends State<SearchScreen> {
     Data.buscarProducto(producto_controller.text).then((value) => {setState(() {widget._lista_productos = value;})}).whenComplete(() =>     setState(() {widget.estado_aplicacion = "DATA_CARGADA";}));
   }
   void addProducto(Producto producto){
-
+    setState(() {
+      widget.lista_productos_2?.add(producto);
+    });
   }
 
   @override
@@ -38,8 +46,8 @@ class _SearchScreenState extends State<SearchScreen> {
             TextFieldCustom((p0){
               GetData();
               }, "Buscar Producto", producto_controller),
-          widget.estado_aplicacion == "NO_DATA"? Infomacion():
-            widget.estado_aplicacion == "CARGANDO"?
+            widget.estado_aplicacion == "NO_DATA"? Infomacion():
+          widget.estado_aplicacion == "CARGANDO"?
           SpinKitPouringHourGlass(color: Colors.white, strokeWidth: 1.0,) :ProductosSection(widget._lista_productos, addProducto),
         ]),
       ),
@@ -47,7 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
 
-  Widget ProductosSection(List<List<List<String>>> lista_productos, Function(Producto) addProducto){
+  Widget ProductosSection(List<List<List<String>>> listaProductos, Function(Producto) addProducto){
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,14 +67,14 @@ class _SearchScreenState extends State<SearchScreen> {
               margin: EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(color: Color(0xff1B262C)),
               child: Text("SUPERMERCADOS", style:TextStyle(fontWeight:FontWeight.bold,fontSize: 25.0, color: Color(0xfFEEEEEE)))),
-        Supermercado("Día", 0xffD14D72,lista_productos[0], addProducto),
-        Supermercado("Carrefour", 0xff3282B8,lista_productos[1], addProducto),
-        Supermercado("Ahorra Más", 0xffFEF2F4,lista_productos[2], addProducto)
+        Supermercado("Día", 0xffD14D72,listaProductos[0], addProducto),
+        Supermercado("Carrefour", 0xff3282B8,listaProductos[1], addProducto),
+        Supermercado("Ahorra Más", 0xffFEF2F4,listaProductos[2], addProducto)
       ]
       ),
     );
   }
-  Widget Supermercado(String nombre,int color ,List<List<String>>lista_productos, Function(Producto) addProducto) {
+  Widget Supermercado(String nombre,int color ,List<List<String>>listaProductos, Function(Producto) addProducto) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
       color: Color(0xff212A3E),
@@ -78,23 +86,22 @@ class _SearchScreenState extends State<SearchScreen> {
             padding:  EdgeInsets.symmetric(vertical: 15.0),
             child: Text(nombre, style: TextStyle(fontSize:30.0,color: Color(color), fontWeight: FontWeight.bold)),
           ),
-          FilaProductos(lista_productos,addProducto,nombre)
+          FilaProductos(listaProductos,addProducto,nombre)
         ],
       ),
     );
   }
 
-  Widget FilaProductos(List<List<String>> lista_productos, Function(Producto) addProducto,String supermercado){
+  Widget FilaProductos(List<List<String>> listaProductos, Function(Producto) addProducto,String supermercado){
     return
-      lista_productos.isNotEmpty?
+      listaProductos.isNotEmpty?
       Container(
-
       width: double.infinity,
       height: 350.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount:lista_productos.length,
-          itemBuilder: (_, index) =>ProductoItem(lista_productos[index], addProducto,supermercado),
+        itemCount:listaProductos.length,
+          itemBuilder: (_, index) =>ProductoItem(listaProductos[index], addProducto,supermercado),
     ),
   ):Container(
         width: double.infinity,
@@ -110,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
 }
   Widget ProductoItem(Object item, Function(Producto) addProducto, String supermercado){
     List<String> producto = item as List<String>;
-    String nombre_producto = producto[0];
+    String nombreProducto = producto[0];
     String precio = producto[1];
     String imagen = producto[2] as String;
 
@@ -133,7 +140,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    child: Column(
                      children: [
                        Text(
-                         nombre_producto, textAlign: TextAlign.center,overflow:TextOverflow.ellipsis ,
+                         nombreProducto, textAlign: TextAlign.center,overflow:TextOverflow.ellipsis ,
                          style: TextStyle(color:Color(0xffEEEEEE), fontWeight: FontWeight.bold,fontSize:17.0),
                        ),
                        Text(precio,
@@ -142,7 +149,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    ),
                  ),
                   ElevatedButton(onPressed: (){
-                    Producto prd = Producto(nombre: nombre_producto, precio: precio, supermercado: supermercado, imagen:imagen);
+                    Producto prd = Producto(nombre: nombreProducto, precio: precio, supermercado: supermercado, imagen:imagen);
                       addProducto(prd);
                    },
                       style: ButtonStyle(
@@ -188,7 +195,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
        const  Padding(
           padding: EdgeInsets.only(bottom: 16.0),
-          child: Text("- Principalmente, podrás buscar los producttos por su nombre y la aplicación se encargará de buscas en los distintos supermercados los podructos que coincididan con el nombre insertado ",
+          child: Text("- Principalmente, podrás buscar los productos por su nombre y la aplicación se encargará de buscas en los distintos supermercados los podructos que coincididan con el nombre insertado ",
             style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, ),),
         ),
         const Text("- Tendrás la opción de buscar el producto por su código EAN, sin embargo, esta función solo estará disponible en los supermercados Carrefour y Día.",
