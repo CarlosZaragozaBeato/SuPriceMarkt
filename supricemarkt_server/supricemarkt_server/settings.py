@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web_scrapping',
-    'sql_actions',
     'corsheaders',
 ]
 
@@ -53,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'supricemarkt_server.urls'
@@ -81,6 +82,7 @@ WSGI_APPLICATION = 'supricemarkt_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+""" 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -90,20 +92,17 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
-}
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_METHODS = [    'DELETE',    'GET',    'OPTIONS',    'PATCH',    'POST',    'PUT',]
-
+} 
+"""
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_METHODS = [ 'GET']
 CORS_ALLOW_HEADERS = [    'access-control-allow-origin',    'content-type',]
-
 CORS_PREFLIGHT_MAX_AGE = 86400
-
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000',
-                        'http://127.0.0.1:8000']
-
-
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'myapp://*', 
+]
+ALLOWED_HOSTS = ['192.168.1.141']
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
