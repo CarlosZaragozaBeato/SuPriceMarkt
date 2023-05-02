@@ -1,7 +1,8 @@
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 import 'package:supricemarkt_app/Components/TextFieldCustom.dart';
 import 'package:supricemarkt_app/Data/model/Producto.dart';
 import 'package:supricemarkt_app/Data/responses/Data.dart';
@@ -20,16 +21,26 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
 
-
-
   TextEditingController producto_controller = TextEditingController();
 
-  void GetData() async{
+  void GetData() async {
     setState(() {
       widget.estado_aplicacion = "CARGANDO";
     });
-    Data.buscarProducto(producto_controller.text).then((value) => {setState(() {widget._lista_productos = value;})}).whenComplete(() =>     setState(() {widget.estado_aplicacion = "DATA_CARGADA";}));
+    Data.buscarProducto(producto_controller.text)
+        .then((value) {
+      setState(() {
+        widget._lista_productos = value;
+        widget.estado_aplicacion = "DATA_CARGADA";
+      });
+    })
+        .catchError((error) {
+      setState(() {
+        widget.estado_aplicacion = "CARGANDO";
+      });
+    });
   }
+
   void addProducto(Producto producto){
     setState(() {
       widget.lista_productos_2?.add(producto);
@@ -48,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
               }, "Buscar Producto", producto_controller),
             widget.estado_aplicacion == "NO_DATA"? Infomacion():
           widget.estado_aplicacion == "CARGANDO"?
-          SpinKitPouringHourGlass(color: Colors.white, strokeWidth: 1.0,) :ProductosSection(widget._lista_productos, addProducto),
+          Lottie.asset('static/loading.json') :ProductosSection(widget._lista_productos, addProducto),
         ]),
       ),
     );
@@ -60,32 +71,36 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
       children:[
-          Container(
-            width: double.infinity,
-              alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(vertical: 15.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
-              decoration: BoxDecoration(color: Color(0xff1B262C)),
-              child: Text("SUPERMERCADOS", style:TextStyle(fontWeight:FontWeight.bold,fontSize: 25.0, color: Color(0xfFEEEEEE)))),
+         Text("SUPERMERCADOS",
+          style:TextStyle(fontWeight:FontWeight.bold,fontSize: 25.0, color: Color(0xfFEEEEEE))),
+
         Supermercado("Día", 0xffD14D72,listaProductos[0], addProducto),
         Supermercado("Carrefour", 0xff3282B8,listaProductos[1], addProducto),
-        Supermercado("Ahorra Más", 0xffFEF2F4,listaProductos[2], addProducto)
+        Supermercado("Ahorra Más", 0xff27496D,listaProductos[2], addProducto)
       ]
       ),
     );
   }
   Widget Supermercado(String nombre,int color ,List<List<String>>listaProductos, Function(Producto) addProducto) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
-      color: Color(0xff212A3E),
+      margin: EdgeInsets.symmetric(vertical: 30.0, horizontal: 5),
+      color: Color(0xffB7B7B7),
+
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding:  EdgeInsets.symmetric(vertical: 15.0),
-            child: Text(nombre, style: TextStyle(fontSize:30.0,color: Color(color), fontWeight: FontWeight.bold)),
-          ),
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                color: Color(0xffFDFDFD),
+                border: Border(
+                  bottom: BorderSide(width:2.0, color: Color(0xffB7B7B7)),
+                ),),
+                padding:  EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(nombre, style: TextStyle(fontSize:30.0,color: Color(color), fontWeight: FontWeight.bold))
+            ),
           FilaProductos(listaProductos,addProducto,nombre)
         ],
       ),
@@ -95,14 +110,19 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget FilaProductos(List<List<String>> listaProductos, Function(Producto) addProducto,String supermercado){
     return
       listaProductos.isNotEmpty?
-      Container(
-      width: double.infinity,
-      height: 350.0,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount:listaProductos.length,
-          itemBuilder: (_, index) =>ProductoItem(listaProductos[index], addProducto,supermercado),
-    ),
+      CarouselSlider(
+        options: CarouselOptions(height: 350.0),
+        items: listaProductos.map((card) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: .5),
+                child: ProductoItem(card, addProducto,supermercado),
+              );
+            },
+          );
+        }).toList(),
   ):Container(
         width: double.infinity,
         height: 50.0,
@@ -123,20 +143,21 @@ class _SearchScreenState extends State<SearchScreen> {
 
     return Container(
         padding: EdgeInsets.symmetric(vertical: 10),
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: EdgeInsets.symmetric(horizontal: 0),
         width: 300.0,
         //margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5.0),
         height: double.infinity,
-        decoration: BoxDecoration( color: Color(0xff1B262C)),
+        decoration: BoxDecoration( color: Color(0xff212A3E),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.network(imagen, width: 150.0,),
+            Image.network(imagen, width: 100.0,height: 200,),
               Column(
                 children: [
                  Padding(
-                   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                    child: Column(
                      children: [
                        Text(

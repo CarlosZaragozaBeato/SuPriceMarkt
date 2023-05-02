@@ -30,9 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor:  Color(0xff0F4C75),
+      backgroundColor:  Color(0xff2C3639),
       bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Color(0xff0F4C75),
+          backgroundColor: Color(0xff2C3639),
           color:Color(0xff1B262C),
           buttonBackgroundColor: Color(0xff1B262C),
           animationDuration: Duration(milliseconds: 300),
