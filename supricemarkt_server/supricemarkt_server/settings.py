@@ -94,7 +94,7 @@ DATABASES = {
     }
 } 
 """
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = [ 'GET']
 CORS_ALLOW_HEADERS = [    'access-control-allow-origin',    'content-type',]
 CORS_PREFLIGHT_MAX_AGE = 86400
@@ -102,7 +102,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'myapp://*', 
 ]
-ALLOWED_HOSTS = ['192.168.1.141']
+ALLOWED_HOSTS = ['192.168.1.141', 'localhost', '127.0.0.1']
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

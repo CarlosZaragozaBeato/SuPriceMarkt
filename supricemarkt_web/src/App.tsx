@@ -20,8 +20,7 @@ function App() {
   const [ahorraMasProducts, setAhorraMasProducts] = useState<supermercadoType>(AhorraMasPrd)
   const [ultimoProducto, setUltimoProducto] = useState<Producto|null>(null)
   const [listaProducts, setListaProducts] = useState<Producto[]> ([])
-
-
+  const [totalPrecio, setTotalPrecio] = useState<number>(0)
 
 
 
@@ -40,6 +39,8 @@ function App() {
     setUltimoProducto:setUltimoProducto,
     listaProducts:listaProducts, 
     setListaProducts:setListaProducts, 
+    totalPrecio:totalPrecio,
+    setTotalPrecio:setTotalPrecio
 } 
 
   return (
@@ -86,6 +87,6 @@ export let cards:typeCards[] = [
     nombre:"CART",
     route_param:ROUTES.CART,
     image: CestaImage,
-    color:'#DFF6FF'
+    color:'#B2C8DF'
   }     
 ]

@@ -38,8 +38,6 @@ function Home() {
             await axios
                 .get(`http://127.0.0.1:8000/main/api/search?producto=${producto}`)
                 .then((response) => {
-
-                    
                     let dia:supermercadoType = {
                         listaProductos:pasarJson(response.data[0]),
                         supermercado: {
@@ -49,7 +47,6 @@ function Home() {
                           }
                     
                         }
-                       
                     let carrefour:supermercadoType = {
                         listaProductos:pasarJson(response.data[1]),
                         supermercado: {
@@ -66,20 +63,14 @@ function Home() {
                             image: 'https://www.ahorramas.com/on/demandware.static/Sites-Ahorramas-Site/-/default/dwb9ae299d/images/logo.svg',
                           },
                     }
-
-
                     setDiaProducts(dia)
                     setCarrefourProducts(carrefour)
                     setAhorraMasProducts(ahorraMas)
-                    
                     console.log(response.data)
-
                     setItems(true);
                     setLoading(false);
                 })
                 .catch((e) => { console.error(e)});
-
-
         }
     }
 

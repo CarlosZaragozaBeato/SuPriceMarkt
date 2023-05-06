@@ -7,11 +7,12 @@ import { Producto } from "../../../model/Producto"
 
 function ProductsItem(item:typeProducts){
 
-    const { setUltimoProducto, setListaProducts, listaProducts} = useContext(ProductsContext);
+    const { setUltimoProducto, setListaProducts, listaProducts,setTotalPrecio, totalPrecio} = useContext(ProductsContext);
 
     async function AddProducts(){
         setUltimoProducto(item.producto)
         setListaProducts([...listaProducts, item.producto])
+        setTotalPrecio(totalPrecio+Number(item.producto.precio))
     
         const informacion = {
             nombre: item.producto.nombre,
@@ -26,9 +27,6 @@ function ProductsItem(item:typeProducts){
           }).catch(error => {
             console.log(error);
           });
-
-
-    
     }
 
 

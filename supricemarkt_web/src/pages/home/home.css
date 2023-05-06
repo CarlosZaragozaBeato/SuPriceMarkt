@@ -1,7 +1,6 @@
 
-
 main{
-    min-height: 88vh;
+    min-height: 80vh;
 }
 
 main .search{
@@ -15,7 +14,7 @@ main .search{
 main .search div {
     min-width: 300px;
     width: 25%;
-    background-color: var(--fourth_v2);
+    background-color: var(--second);
     padding:1vh;
     margin-right: 1rem;
     border-radius: 5px;
@@ -30,24 +29,29 @@ main .search div input {
     outline: none;
     border: none;
     border-radius: 5px;
-    background-color: var(--white);
+    background-color: var(--blue);
     color:var(--fourth_v2);
+    opacity: .7;
     font-size: 1.25rem;
+    transition: all 150ms linear;
 }
+main .search div input:focus{
+    opacity: 1;
+} 
 main .search div button{
     width: 70px;
     height: 60px;
-    background-color: var(--first_v2);
+    background-color: var(--blue);
     outline: none;
     border: none;
     padding:1vh;
     border-radius: 10px;
     cursor: pointer;
     transition: all 150ms linear;
+    opacity: .7;
 }
 main .search div button:hover{
     opacity: 1;
-    background-color: var(--white);
 }
 main .search div button img{
     width: 100%;
@@ -62,13 +66,12 @@ main{
 .info_container{
     width: 50%;
     min-width: 500px;
-    margin-top: 1rem;
-    padding: 1.5rem;
+    margin-top: .5rem;
+    padding: 1rem;
     border-radius: 2.5px;
     background-color: var(--second);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
-
 .info_container h1{
     color:var(--blue);
 }
@@ -85,7 +88,7 @@ main{
 }
 .main_header{
     width: 100%;
-    background-color: var(--third);
+    background-color: var(--fourth_v2);
     padding:2vh 0;
 }
 .main_header h3{
@@ -100,7 +103,7 @@ main{
     margin: 1.25rem 0;
 }
 .super_item{
-    background-color: var(--white);
+    background-color: #ffffff32;
     width: 40%;
     padding:1rem;
     border-radius: 5px;
@@ -113,7 +116,7 @@ main{
 }
 
 .super_item  .super_header a{
-    color:var(--fourth_v2);
+    color:var(--first_v2);
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -128,7 +131,7 @@ main{
 }
 .super_item .super_header h2{
     font-size: 2rem;
-    color:var(--first);
+    color:var(--forth);
 }
 
  ul li{
@@ -158,15 +161,12 @@ main{
 }
 .product_item{
     width: 100%;
-    background-color: var(--pink);
+    background-color: #22283120;
     display:flex;
     flex-direction: column;
     align-items: center;
     margin:2rem 0;
-
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-
-
 }
 
 .product_item .product_item_header {
@@ -182,11 +182,11 @@ main{
 }
 
 .product_item .product_item_header div h3{
-    color:var(--black);
+    color:var(--white);
     font-size: 1.15rem;
 }
 .product_item .product_item_header div p{
-    color:var(--first);
+    color:var(--forth);
     font-weight: bold;
 }
 .product_item .product_item_header img{

@@ -2,21 +2,21 @@
 :root{
 
   /*PRIMERA PALETA PRUEBA*/
-  --first:#245953;
-  --second:#408E91;
+  --first:#364F6B;
+  --second:#393E46;
   --third:#E49393;
   --forth:#D8D8D8;
-
-
+  --bg:#222831;
 
   /*SEGUNDA PALETA PRUEBA*/
-  --first_v2:#AACFCF;
+  --first_v2:#B2C8DF;
   --second_v2:#FEFAEC;
   --third_v2:#ffe7e7;
   --fourth_v2:#596E79;
   --white:#FFFFFF;
   --blue:#F4F9F9;
   --pink:#FFFAFA;
+  --red:#FF2E63;
   --black:#393053;
 }
 * {
@@ -28,5 +28,5 @@
 #root{
   width: 100%;
   min-height: 100vh;
-  background-color: var(--blue);
+  background-color: var(--bg);
 }

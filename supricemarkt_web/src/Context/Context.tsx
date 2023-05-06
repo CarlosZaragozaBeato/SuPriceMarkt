@@ -20,6 +20,8 @@ export interface tipos {
     setUltimoProducto:(c:Producto)=> void,
     listaProducts:Producto[], 
     setListaProducts:(c:Producto[])=> void,
+    totalPrecio:number, 
+    setTotalPrecio:(c:number)=> void,
 }
 
 export let DiaPrd:supermercadoType = {
@@ -63,7 +65,9 @@ let initialState:tipos = {
     ultimoProducto:null,
     setUltimoProducto:()=>{},
     listaProducts:[],
-    setListaProducts:()=>{}
+    setListaProducts:()=>{},
+    totalPrecio:0,
+    setTotalPrecio:()=>{}
 }
 
 
