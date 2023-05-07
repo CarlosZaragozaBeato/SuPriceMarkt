@@ -8,7 +8,6 @@ import CestaImage from './static/images/cesta.png'
 import NavBar from './pages/Components/NavBar/NavBar';
 import Cart from './pages/Cart/Cart';
 import { Producto } from './model/Producto';
-import { Supermercado } from './model/Supermercado';
 
 
 function App() {
@@ -21,7 +20,8 @@ function App() {
   const [ultimoProducto, setUltimoProducto] = useState<Producto|null>(null)
   const [listaProducts, setListaProducts] = useState<Producto[]> ([])
   const [totalPrecio, setTotalPrecio] = useState<number>(0)
-
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [currentId, setCurrentId] = useState<number>(0)
 
 
   let valores:tipos ={
@@ -40,7 +40,11 @@ function App() {
     listaProducts:listaProducts, 
     setListaProducts:setListaProducts, 
     totalPrecio:totalPrecio,
-    setTotalPrecio:setTotalPrecio
+    setTotalPrecio:setTotalPrecio,
+    currentIndex:currentIndex,
+    setCurrentIndex:setCurrentIndex,
+    currentId:currentId,
+    setCurrentId:setCurrentId
 } 
 
   return (

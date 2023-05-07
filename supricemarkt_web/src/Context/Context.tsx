@@ -22,6 +22,10 @@ export interface tipos {
     setListaProducts:(c:Producto[])=> void,
     totalPrecio:number, 
     setTotalPrecio:(c:number)=> void,
+    currentIndex: number,
+    setCurrentIndex:(c:number) => void,
+    currentId: number,
+    setCurrentId:(c:number) => void
 }
 
 export let DiaPrd:supermercadoType = {
@@ -67,7 +71,11 @@ let initialState:tipos = {
     listaProducts:[],
     setListaProducts:()=>{},
     totalPrecio:0,
-    setTotalPrecio:()=>{}
+    setTotalPrecio:()=>{},
+    currentIndex:0,
+    setCurrentIndex:()=>{},
+    currentId:0,
+    setCurrentId:()=>{},
 }
 
 

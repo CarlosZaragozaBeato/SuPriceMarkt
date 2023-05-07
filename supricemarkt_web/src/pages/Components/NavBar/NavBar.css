@@ -4,6 +4,7 @@ nav{
     display: flex;
     align-items: center;
     gap:1rem;
+    
 
 }
 nav a{
@@ -48,7 +49,7 @@ nav a{
     nav{
         flex-direction: column;
         align-items: start;
-        margin: 1rem 0.5rem;
+        padding: 1rem 0.5rem;
     }
     .navbar_item p{
         font-size: 1.25rem;

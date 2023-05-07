@@ -82,6 +82,7 @@ function Home() {
         
         response.map((item)=>{
             let producto:Producto = {
+                id:0,
                 nombre:item['0'],
                 precio:item['1'],
                 image:item['2']
